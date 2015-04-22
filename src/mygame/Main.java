@@ -7,7 +7,7 @@ import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
 import hexopod.Leg;
-
+//azad 
 /**
  * test
  * @author normenhansen
