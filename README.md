@@ -1,4 +1,4 @@
-# Hexopod
+# Hexapod
 NHL IDP Project
 
 
