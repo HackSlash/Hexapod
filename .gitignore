@@ -29,3 +29,7 @@
 
 #Jmonkey build files
 /build/
+/dist/
+/nbproject/
+*.so
+build.xml
