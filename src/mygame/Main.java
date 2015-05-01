@@ -32,41 +32,23 @@ public class Main extends SimpleApplication {
    // private Node hipNode;
     @Override
     public void simpleInitApp() {
-    
-        Leg hip = new Leg(1, assetManager);
-        Leg thigh = new Leg(2, assetManager);
-        Leg knee = new Leg(3, assetManager);
-        Leg leg = new Leg(4, assetManager);
-        Leg ankle = new Leg(5, assetManager);
-        Leg base = new Leg(6, assetManager);
         Body body = new Body(assetManager);
+      
+        Leg legRM = new Leg(assetManager);
+        Leg legRF = new Leg(assetManager);
+        Leg legRB = new Leg(assetManager);
         
-        
-        thigh.setLocalTranslation(0f, 0, 0.1f);
-        knee.setLocalTranslation(0f, 0, 0.25f);
-        leg.setLocalTranslation(0f, 0, 0.25f);
-        ankle.setLocalTranslation(0, 0, 0.20f);
-        base.setLocalTranslation(0, 0, 0.3f);
-        
-        ankle.attachChild(base);
-        leg.attachChild(ankle);
-        knee.attachChild(leg);
-        
-        knee.rotate(-1, 0, 0); 
-        ankle.rotate(2.2f, 0, 0);
-        
-        hip.attachChild(thigh);
-        hip.attachChild(knee);
-        hip.rotate(0, -2, 0);
+        legRF.setLocalTranslation(0,0,0.4f);
+        legRB.setLocalTranslation(0,0,-0.4f);
         body.setLocalTranslation(0, 0.4f, 0);
-        hip.setLocalTranslation(-0.1f, 0, 0);
-        body.attachChild(hip);
         
-       
+        body.attachChild(legRF);
+        body.attachChild(legRM);
+        body.attachChild(legRB);
         rootNode.attachChild(body);
         
         //flyCam.setEnabled(true);
-        cam.setLocation(new Vector3f(0f, 2f, -2f));
+        cam.setLocation(new Vector3f(-1, 3f, 4));
         cam.lookAt(new Vector3f(0, 0, 0), Vector3f.ZERO);
        
         // bullet
