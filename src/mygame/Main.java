@@ -48,7 +48,7 @@ public class Main extends SimpleApplication {
         rootNode.attachChild(body);
         
         //flyCam.setEnabled(true);
-        cam.setLocation(new Vector3f(-1, 3f, 4));
+        cam.setLocation(new Vector3f(2, 2f, -1));
         cam.lookAt(new Vector3f(0, 0, 0), Vector3f.ZERO);
        
         // bullet
