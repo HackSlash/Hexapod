@@ -1,7 +1,14 @@
 package hexopod;
 
+import com.jme3.app.state.AppStateManager;
 import com.jme3.asset.AssetManager;
+import com.jme3.bullet.BulletAppState;
+import com.jme3.bullet.collision.shapes.CapsuleCollisionShape;
+import com.jme3.bullet.collision.shapes.CollisionShape;
+import com.jme3.bullet.collision.shapes.MeshCollisionShape;
+import com.jme3.bullet.control.CharacterControl;
 import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.bullet.util.CollisionShapeFactory;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
@@ -14,9 +21,12 @@ import com.jme3.scene.shape.Sphere;
 public class Body extends Node {
 
     private Geometry geoHead; 
-    private Geometry geoHead1; 
+    private Geometry geoBack; 
     private Geometry geoBody; 
     private RigidBodyControl body_phy;
+    private CharacterControl player;
+    private BulletAppState BAS;
+    protected AppStateManager stateManager;
     
 
     private AssetManager assetManager;
@@ -27,37 +37,35 @@ public class Body extends Node {
         initBody();
     }
   private void initBody(){
-      Node node = new Node("body");
-      Sphere  sphere = new Sphere(32, 32, 0.1f);
-      geoHead = new Geometry("head", sphere);
-      Material mat1 = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-      mat1.setColor("Color", ColorRGBA.Brown);
-      geoHead.setMaterial(mat1);           
       
-      Sphere  sphere1 = new Sphere(32, 32, 0.1f);
-      geoHead1 = new Geometry("head", sphere1);
+      Node node = new Node("body");
+      
+      Sphere  sphereHead = new Sphere(32, 32, 0.1f);
+      geoHead = new Geometry("head", sphereHead);
+      Material mat1 = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+      mat1.setColor("Color", ColorRGBA.Red);
+      geoHead.setMaterial(mat1);   
+      geoHead.setLocalTranslation(0, 0, -0.8f);
+
+      Sphere  sphereBack = new Sphere(32, 32, 0.1f);
+      geoBack = new Geometry("back", sphereBack);
       Material mat2 = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
       mat2.setColor("Color", ColorRGBA.Brown);
-      geoHead1.setMaterial(mat2);       
-      geoHead1.setLocalTranslation(0, 0, 0.5f);
-      geoHead.setLocalTranslation(0, 0, -0.5f);
+      geoBack.setMaterial(mat2);       
+      geoBack.setLocalTranslation(0, 0, 0.8f);
+     
       
-        Cylinder cylinder = new Cylinder(30, 30, 0.1f, 1f, true);
+        Cylinder cylinder = new Cylinder(30, 30, 0.1f, 1.6f, true);
         geoBody = new Geometry("body", cylinder);
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         mat.setColor("Color", ColorRGBA.Brown);
         geoBody.setMaterial(mat);
         geoBody.setLocalTranslation(0, 0, 0);
+        
         node.attachChild(geoHead);
-        node.attachChild(geoHead1);
-        node.attachChild(geoBody);
-          // Make the floor physical with mass 0.0f! 
-//        body_phy = new RigidBodyControl(0.0f);
-//        floor.addControl( body_phy);
-//        floor.addControl(new RigidBodyControl(0));
-//        bulletAppState.getPhysicsSpace().add(floor_phy);
-//        rootNode.attachChild(floor);
-//        node
+        node.attachChild(geoBack);
+        node.attachChild(geoBody);       
+            
         this.attachChild(node);
     }
 }

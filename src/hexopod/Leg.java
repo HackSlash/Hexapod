@@ -26,47 +26,26 @@ public class Leg extends Node {
     private Node thighNode;
     private Node legNode;
     private Node baseNode;
+    
 
-    
-    
     
     private int id;
     private AssetManager assetManager;
 
     public Leg(int id, AssetManager assetmanager) {
-        
+        this.id =id;
         assetManager = assetmanager;
-        
-        switch (id) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-                default:
-                    
-        }
-      
-        
-
+        init();
+        setupParts();  
     }
-    public Leg(AssetManager assetmanager){
-        assetManager = assetmanager;
-                initNodes();
-                initHip();
-                initThigh();
-                initKnee();
-                initLeg();
-                initAnkle();
-                initBase();
-                setupParts();                                    
+    private void init(){
+        initNodes();
+        initHip();
+        initThigh();
+        initKnee();
+        initLeg();
+        initAnkle();
+        initBase();                                  
     }
     /*
      * NOTES
@@ -78,6 +57,10 @@ public class Leg extends Node {
      * 
      */
     
+    
+    /*
+     * initialize Nodes for each part of the leg
+     */
     private void initNodes() {
         
         hipNode = new Node();
@@ -86,15 +69,39 @@ public class Leg extends Node {
         legNode = new Node();
         ankleNode = new Node();
         baseNode = new Node();
+        
     }
     
     private void setupParts() {
+            switch (id) {
+            case 1:
+                hipNode.rotate(0, 0, 3.2f);
+                hipNode.setLocalTranslation(0.1f, 0, 0);
+                break;
+            case 2:
+                hipNode.rotate(0, 0, 3.2f);
+                hipNode.setLocalTranslation(0.1f, 0, 0);
+                break;
+            case 3:
+                hipNode.rotate(0, 0, 3.2f);
+                hipNode.setLocalTranslation(0.1f, 0, 0);
+                break;
+            case 4:
+                hipNode.rotate(0, 0, 0f);
+                hipNode.setLocalTranslation(-0.1f, 0, 0);
+                break;
+            case 5:
+                hipNode.rotate(0, 0, 0f);
+                hipNode.setLocalTranslation(-0.1f, 0, 0);
+                break;
+            case 6:
+                hipNode.rotate(0, 0, 0f);
+                hipNode.setLocalTranslation(-0.1f, 0, 0);
+                break;                    
+        }    
+        this.attachChild(hipNode); 
+        }
         
-        hipNode.setLocalTranslation(-0.1f, 0, 0);
-        kneeNode.rotate(0,0, 0f); 
-        hipNode.rotate(0, 0, 0f);
-        this.attachChild(hipNode);
-    }
 
     private void initHip() {
         Cylinder smallCylinder = new Cylinder(20, 20, 0.07f, 0.1f, true);
@@ -161,13 +168,13 @@ public class Leg extends Node {
     }
     
     private void initBase() {
-        Cylinder cylinder = new Cylinder(20, 20, 0.03f, 0.70f, true);
+        Cylinder cylinder = new Cylinder(20, 20, 0.03f, 0.90f, true);
         base = new Geometry("Base", cylinder);
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         mat.setColor("Color", ColorRGBA.Red);
         base.setMaterial(mat);
         baseNode.attachChild(base);
-        baseNode.setLocalTranslation(-0.02f, 0.35f, 0.0f);
+        baseNode.setLocalTranslation(-0.02f, 0.45f, 0.0f);
         baseNode.rotateUpTo(Vector3f.UNIT_Y);
         baseNode.rotate(1.5f, 1.5f, 0);
         ankleNode.attachChild(baseNode);
