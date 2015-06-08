@@ -7,7 +7,7 @@ class Module(object):
 		
 		function = 0;
 		
-		if loopFunction!==None:
+		if loopFunction != None:
 			fnction = self.loop;
 		else:
 			function = loopFunction;
