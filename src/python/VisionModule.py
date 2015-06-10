@@ -37,15 +37,11 @@ class VisionModule():
 	"""Starts the Vision program, with the right kind of balloon"""
 	def startVision(self, color):
 		if color == "red":
-			subprocess.Popen("./Vision b", shell=True)
+			subprocess.Popen("./Vision r", shell=True)
 		elif color == "blue":
 			subprocess.Popen("./Vision b", shell=True)
 		else:
 			sys.exit("ERROR 1: invalid input int method \"startVision\", \"" + color + "\" not recognised. exiting!")
-
-	"""Kills the vision program currently running."""
-	def stopVision(self):
-		subprocess.open("pkill Vision", shell=True)
 
 	"""main method"""
 	def main(arg):
@@ -65,7 +61,7 @@ class VisionModule():
 				sys.exit("Program exited with code 0 (no problems).")
 				#return 0
 		
-
+"""Original call of class"""
 if len(sys.argv) == 2:
 	vision = VisionModule(sys.argv[1])
 else:
