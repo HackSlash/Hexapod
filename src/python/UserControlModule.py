@@ -1,9 +1,17 @@
-class UserControlerModule(Module):
-	def __init__(self, ident):
-		super(Module, self).__init__(ident, 3, loopFunction=self.loop);
-	
-	def loop(self):
-		print("Module loop");
-		super().loop();
-	
-	controller.addForegroundModule(UserControlModule("User controle module"));
+import sys
+
+"""docstring for UserControlModule"""
+class UserControlModule(object):
+	def __init__(self, arg):
+		super(UserControlModule, self).__init__()
+		self.arg = arg
+		
+
+	def main(arg):
+		#main code
+
+usercontrol=new UserControlModule(sys.arg)
+
+
+if __name__== "__main__":
+	usercontrol.main(sys.arg[1])
