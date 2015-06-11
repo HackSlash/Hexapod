@@ -1,11 +1,14 @@
+"""docstring for Controller"""
 class Controller(object):
 	__foregroundModules = [];
 	__backgroundModules = [];
 	
 	__currentForegroundModule = "";
 	
-	def __init__(self):
-		pass
+	"""constructor"""
+	def __init__(self, arg):
+		super(Controller, self).__init__()
+		self.arg = arg
 	
 	def getForegroundModuleIdList(self):
 		returnList = [];
@@ -57,4 +60,10 @@ class Controller(object):
 		
 		return True;
 
-controller = Controller();
+	def main(self, arg):
+		#main code
+
+controller = Controller()
+
+if __name__== "__main__":
+	controller.main()
