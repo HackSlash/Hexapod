@@ -2,6 +2,7 @@
 class Controller(object):
 	__foregroundModules = [];
 	__backgroundModules = [];
+	__comunicationsInterface = object
 	
 	__currentForegroundModule = "";
 	

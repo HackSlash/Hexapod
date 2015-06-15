@@ -9,9 +9,3 @@ class StandbyWakeModule(object):
 
 	def main(arg):
 		#main code
-
-standbyWake=new StandbyWakeModule(sys.arg)
-
-
-if __name__== "__main__":
-	usercontrol.main(sys.arg[1])

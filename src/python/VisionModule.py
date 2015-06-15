@@ -1,74 +1,48 @@
 import sys
+import os
 import subprocess
 import time
-
-###################################################
-###################################################
-######## This program is not fully tested #########
-###################################################
-###################################################
+from movementModule import movementModule
 
 """docstring for VisionModule"""
 class VisionModule():
-	statusRed = False
-	statusBlue = False
-	file0 = ["0\n", "\n", "\n", ""]
-	file1 = ["2\n", "\n", "\n", ""]
-
-	balloonValues = []
 	
 	"""Constructor"""
 	def __init__(self, arg):
 		super(VisionModule, self).__init__()
 		self.arg = arg
-		self.main(arg)
-
-	"""docstring for sendFile method"""
-	def sendFile(self, array):
-		with open("test.txt") as fw:
-			fw.writelines(array)
-
-	"""Reads all lines out of a file, and returns them as a list"""
-	def readFile(self):
-		with open("test.txt") as fr:
-			lines = fr.read().splitlines()
-		return lines
+		if arg == "red":
+			self.startColor = "red"
+		elif arg == "blue":
+			self.startColor = "blue"
+		else:
+			sys.exit("Invalid color in argument!")
+		movement = movementModule()
 	
 	"""Starts the Vision program, with the right kind of balloon"""
 	def startVision(self, color):
 		if color == "red":
-			subprocess.Popen("./Vision r", shell=True)
-		elif color == "blue":
-			subprocess.Popen("./Vision b", shell=True)
+			path = "./Vision r"
 		else:
-			sys.exit("ERROR 1: invalid input int method \"startVision\", \"" + color + "\" not recognised. exiting!")
-
+			path = "./Vision b"
+		cProgram = subprocess.Popen(path, stdout=PIPE, stderr=STDOUT, shell=True, preexec_fn=os.setsid)
+		for cFeedback in cProgram.stdout:
+			pFeedback = cFeedback.decode("utf-8").replace('\n', '')
+			movement.moveOnBalloon(pFeedback)
+		
 	"""main method"""
-	def main(arg):
-		sendFile()
-		self.startVision(arg)
+	def main(self):
+		if self.startColor == "red":
+			self.startVision("red")
+			self.startVision("blue")
+		else:
+			self.startVision("blue")
+			self.startVision("red")
 		
-		while 1:
-			lijst = self.readFile()
-			if lijst[1] == 0:
-				time.sleep(1)
-			elif lijst[0] == 1:
-				sendFile(file0)
-				self.balloonValues = lijst
-				#TODO: Pass on the values to movement module.
-			else:
-				sendFile(file1)
-				sys.exit("Program exited with code 0 (no problems).")
-				#return 0
 		
-"""Original call of class"""
-if len(sys.argv) == 2:
-	vision = VisionModule(sys.argv[1])
-else:
-	sys.exit("Invalid number of arguments.")
-
-
-
-
-"""...Old Code..."""
-#print(subprocess.Popen("./Vision r", shell=True, stdout=subprocess.PIPE).stdout.read())
+	"""
+	if len(sys.argv) == 2:
+		vision = VisionModule(sys.argv[1])
+	else:
+		sys.exit("Invalid number of arguments.")
+	"""

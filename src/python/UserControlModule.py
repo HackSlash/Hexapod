@@ -9,9 +9,3 @@ class UserControlModule(object):
 
 	def main(arg):
 		#main code
-
-usercontrol=new UserControlModule(sys.arg)
-
-
-if __name__== "__main__":
-	usercontrol.main(sys.arg[1])

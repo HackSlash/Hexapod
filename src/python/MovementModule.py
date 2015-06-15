@@ -35,6 +35,9 @@ class MovementModule(object):
 	def strafeRight(self, length):
 		#code to strafe right
 
+	def moveOnBalloon(self, location):
+		#code
+
 	def main(self, arg):
 		#main code
 
